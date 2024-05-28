@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title>Đăng ký thông tin</title>
+    <style>
+        .centered-text{
+            font-size: 24px;
+            text-align: center;
+        }
+        .form_group{
+            margin-bottom: 15px;
+        }
+        .form_label{
+            font-size: 18px;
+        }
+        .form_input{
+            font-size: 16px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .submit-button{
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background-color:  #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .hidden{
+            display: none;
+        }
+        .wrapper input[type="checkbox"] {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .wrapper p {
+            display: inline-block;
+            vertical-align: middle; 
+        }
+    </style>
+</head>
+<body>
+    <h5 class="centered-text">Hoá đơn</h5>
+    <form>
+        <div class="wrapper">
+            <input type="checkbox" id="checkbox" name="checkbox" onclick="checkCheckbox()">
+            <p>sử dụng điểm đã tích</p>
+        </div>
+        <script>
+            var selectedOption = '';
+            var checkboxChecked = false;
+        
+            function checkCheckbox() {
+                checkboxChecked = document.getElementById('checkbox').checked;
+            }
+        </script>
+    </form>
+    <h5 class="centered-text">Thông tin nhận hàng</h5>
+    <form action="/submit" method="post" onsubmit="return validateForm()">
+        <div class="form_group">
+            <label for="name" class="form_label">1. Họ và tên</label>
+            <input type="text" id="name" name="name" class="form_input">
+        </div>
+        <div class="form_group">
+            <label for="phone" class="form_label">2. Số điện thoại</label>
+            <input type="text" id="phone" name="phone" class="form_input">
+        </div>
+        <div class="form_group">
+            <label for="email" class="form_label">3. Email</label>
+            <input type="text" id="email" name="email" class="form_input">
+        </div>
+        <button type="button" id="ship-to-address" class="submit-button" onclick="selectShippingOption('address')">Giao hàng</button>
+        <div id="address-section" class="form_group hidden">
+            <label for="address" class="form_label">Địa chỉ giao hàng</label>
+            <input type="text" id="address" name="address" class="form_input">
+        </div>
+        <button type="button" id="buy-at-shop" class="submit-button" onclick="selectShippingOption('shop')">Mua hàng tại shop</button>
+        <div id="shop-section" class="form_group hidden">
+            <label for="shop" class="form_label">Địa chỉ shop</label>
+            <p>150 Bùi Thị Xuân, quận 1, TP. Hồ Chí Minh</p>
+        </div>
+        <script>
+            var selectedOption = '';
+
+            function selectShippingOption(option) {
+                selectedOption = option;
+                if(option === 'address') {
+                    document.getElementById('address-section').classList.remove('hidden');
+                    document.getElementById('shop-section').classList.add('hidden');
+                } else {
+                    document.getElementById('shop-section').classList.remove('hidden');
+                    document.getElementById('address-section').classList.add('hidden');
+                    document.getElementById('address').value = '';
+                }
+            }
+
+            function validateForm() {
+                if (selectedOption === '') {
+                    alert("Vui lòng chọn 'Giao hàng' hoặc 'Mua hàng tại shop' trước khi nhấn Submit.");
+                    return false;
+                } else if (selectedOption === 'address') {
+                    var addressInput = document.getElementById('address');
+                    if (addressInput.value.trim() === '') {
+                        alert("Vui lòng nhập địa chỉ giao hàng.");
+                        return false;
+                    }
+                }
+                return true;
+            }
+        </script>
+        <div class="form_group">
+            <label for="note" class="form_label">Ghi chú</label>
+            <input type="text" id="note" name="note" class="form_input">
+        </div>
+          
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+
+</body>
+</html>
