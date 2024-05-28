@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head> 
     <title>Đăng ký thông tin</title>
     <style>
@@ -60,6 +60,7 @@
             }
         </script>
     </form>
+    
     <h5 class="centered-text">Thông tin nhận hàng</h5>
     <form action="/submit" method="post" onsubmit="return validateForm()">
         <div class="form_group">
@@ -74,6 +75,7 @@
             <label for="email" class="form_label">3. Email</label>
             <input type="text" id="email" name="email" class="form_input">
         </div>
+        <h3>Phương thức nhận hàng</h3>
         <button type="button" id="ship-to-address" class="submit-button" onclick="selectShippingOption('address')">Giao hàng</button>
         <div id="address-section" class="form_group hidden">
             <label for="address" class="form_label">Địa chỉ giao hàng</label>
